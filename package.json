@@ -1,0 +1,23 @@
+{
+  "name": "packy",
+  "version": "1.0.0",
+  "description": "A lighter, simpler elephant.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "csv-to-json": "^0.1.2",
+    "csv-write-stream": "^2.0.0",
+    "express": "^4.14.0",
+    "json2csv": "^3.7.3",
+    "jsonfile": "^2.4.0",
+    "keygenerator": "^1.0.4",
+    "mustache-express": "^1.2.4",
+    "rimraf": "^2.5.4"
+  }
+}
