@@ -1,8 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <title>Packy</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+  <link href="/css/phant.min.css" rel="stylesheet">
+  <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+  <script src="/js/phant-manager.min.js"></script>
+
+
+  <nav class="desktop-nav">
+
+    <div class="container-fluid">
+
+      <ul class="nav navbar-right navbar-nav">
+        <li class="home"><a href="/">Packy</a></li>
+        <li class="make-stream">
+          <a href="/streams/create">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+          </a>
+        </li>
+      </ul>
+
+    </div>
+
+  </nav>
+
+  <nav class="mobile-nav">
+
+    <div class="container-fluid">
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Packy</a>
+      </div>
+
+      <div class="navbar-collapse collapse" style="height: auto;">
+        <ul class="nav navbar-nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/streams/view">Explore Streams</a></li>
+          <li><a href="/streams/create">Create a Stream</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+  </nav>
+</head>
+
+<body>
+
 <div class="container">
 
   <div class="row hero">
     <div class="col-md-12">
-      <h1><span>Packy</span><br>a <b>simple</b> place<br>to push<br>your data.</h1>
+      <h1><span>Packy</span><br>a <b>simple</b> place<br>to push and<br> manage your data.</h1>
     </div>
   </div>
 
@@ -12,8 +72,8 @@
 
       <h3>The Internet of Your Things</h3>
       <p>Packy allows any widget or web service that can create an http request to
-      post data to a centralized location. Phant is built with Node.js, released as open
-      source, and designed from the start for simplicity and hackability. </p>
+      post, access and manipultate data in a centralized location. Packy is built with Node.js, released as open
+      source, and designed from the start for simplicity and hackability as a spinoff project based on <a href="https://data.sparkfun.com">Phant</a> </p>
 
       <h3>What types of projects would benefit from this service?</h3>
       <p>Almost anything. Your weather station in the backyard. A classroom of kids
@@ -23,7 +83,7 @@
       servers.</p>
 
       <h3>How can I give feedback about this project?</h3>
-      <p>Send us an email: data@sparkfun.com</p>
+      <p>Send us an email: derek.runberg@sparkfun.com</p>
 
     </div>
 
@@ -41,6 +101,11 @@
           <p>Explore all of the public data streams.</p>
         </div>
 
+        <div class="block5">
+          <a href="#">Learn</a>
+          <p>Read the docs to find out all of the nitty gritty.</p>
+        </div>
+
       </div>
 
     </div>
@@ -48,3 +113,11 @@
   </div>
 
 </div>
+
+</body>
+<footer>
+  <div class="container-fluid">
+    <p>Brought to you with &#x2764; by <a href="https://sparkfun.com">SparkFun Electronics</a>.</p>
+  </div>
+</footer>
+</html>

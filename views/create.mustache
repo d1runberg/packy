@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Packy</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+    <link href="/css/phant.min.css" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=places"></script>
+    <script src="/js/phant-manager.min.js"></script>
+
+
+    <nav class="desktop-nav">
+
+      <div class="container-fluid">
+
+        <ul class="nav navbar-right navbar-nav">
+          <li class="home"><a href="/">Packy</a></li>
+          <li class="make-stream">
+            <a href="/streams/create">
+              <span class="glyphicon glyphicon-plus-sign"></span>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+
+    </nav>
+
+    <nav class="mobile-nav">
+
+      <div class="container-fluid">
+
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Packy</a>
+        </div>
+
+        <div class="navbar-collapse collapse" style="height: auto;">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/streams/view">Explore Streams</a></li>
+            <li><a href="/streams/create">Create a Stream</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+    </nav>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="row hero">
+    <div class="col-md-12">
+      <h1><span>Create</span><br>a <b>stream</b><br>to push and<br> manage your data.</h1>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="info-home">
+
+      <h3>Name Your Stream</h3>
+      <p>In lieu of a public key that was used in Phant, you give your stream a
+        name and that is how you will reference it in the future. Remember the name that you give
+      it and know that all names are public and can be viewed by everyone using Packy. Once you
+      create your stream you will be give a secret key and delete key, these will be needed to be able
+      to log and manage your stream in the future.</p>
+
+      <h3>Give it Fields</h3>
+      <p>You need to give the data you will be pushing to your stream titles. These fields need to be entered in a
+      comma seperated value format in this form. You will then be able to log to your stream using these names in
+      the query string of your logging URL.</p>
+
+      <h3>Start Using Packy</h3>
+      <p>Click the create button and start logging to your new stream.</p>
+
+      <h3>Using Packy</h3>
+      <p>To use packy once you have created a stream after giving it a name, fields and clicked the
+        create button, please visit the <a href="#">Learn</a> section for a complete rundown of how to use
+        the Packy API. </p>
+
+    </div>
+
+    <div class="info-blocks">
+    <div class="well">
+   <!-- form -->
+   <form action="/streams/create" method="post">
+   <div class="form-group">
+     <label for="streamName">Stream Name</label>
+     <input type="text" class="form-control" id="streamName" placeholder="Stream Name" name="streamName">
+   </div>
+   <div class="form-group">
+     <label for="fieldsCSV">Fields</label>
+     <input type="text" class="form-control" id="fieldsCSV" placeholder="this,that,you,me" name="fieldCSV">
+   </div>
+   <button type="submit" class="btn btn-default">Create Stream</button>
+ </form>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+<footer>
+  <div class="container-fluid">
+    <p>Brought to you with &#x2764; by <a href="https://sparkfun.com">SparkFun Electronics</a>.</p>
+  </div>
+</footer>
+</html>

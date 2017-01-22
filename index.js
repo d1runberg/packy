@@ -22,21 +22,27 @@ const app = express();
 
 //middleware
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(express.static(__dirname + '/public'));
 app.engine('mustache', mustacheExpress());
 
 app.set('view engine', 'mustache');
 app.set('views', __dirname + '/views');
+app.set('partials', __dirname+ '/views/partials');
 
 //get "home" / root
 app.get('/', (req,res,next)=>{
-  res.end('Future home page');
+  res.render('home');
   //next();
 });
 
 //get call to streams/create
 app.get('/streams/create', (req,res,next)=>{
   //send GUI form page for creating a stream
-  res.end('Future create GUI');
+  res.render('create');
+  //res.end('Future create GUI');
   //next();
 });
 
@@ -169,6 +175,41 @@ fileSys.mkdir(path.join(__dirname+'/streams/'+streamMeta.name), (err)=>{
 //next();
 });
 
+app.post('/streams/create', (req,res)=>{
+  //var incoming = req.body;
+  console.log(req.body);
+
+  streamMeta = {
+    "name": req.body.streamName,
+    "key": keygen._(),
+    "del_key": keygen._(),
+    "fields": req.body.fieldCSV,
+    "fieldString": "timeStamp"+","+req.body.fieldCSV
+  }
+  //create stream directory
+  fileSys.mkdir(path.join(__dirname+'/streams/'+streamMeta.name), (err)=>{
+    if(err){
+      console.log(err);
+    }
+
+    jsonfile.writeFile(path.join(__dirname+'/streams/'+streamMeta.name+'/meta.json'),streamMeta, (err)=>{
+      if(err){
+        console.log(err);
+      }
+      fileSys.appendFile(path.join(__dirname+'/streams/'+streamMeta.name+'/log.csv'),streamMeta.fieldString+'\n',(err)=>{
+        //write log.csv
+        //respond with private keys
+           //example get request
+           res.write("Stream Created!" + '\n');
+           res.write("Private Key: " + streamMeta.key+ ' \n');
+           res.end("Delete Key: " + streamMeta.del_key);
+           //res.render('createResponse',:{});
+      });
+    });
+  });
+});
+
+
 app.get('/streams/input/:name/:key', (req,res,next)=>{
   //if stream exists
   fileSys.readdir(path.join(__dirname+'/streams/'+req.params.name), (err,files)=>{
@@ -209,6 +250,10 @@ app.get('/streams/input/:name/:key', (req,res,next)=>{
     });
   //  next();
   });
+
+app.get('/streams/clear/:name/:privateKey', (req,res,next)=>{
+  //clear the log file.
+});
 
 app.use((err, req, res, next)=> {
   res.status(500);
