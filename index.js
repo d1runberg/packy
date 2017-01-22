@@ -38,6 +38,10 @@ app.get('/', (req,res,next)=>{
   //next();
 });
 
+app.get('/docs', (req,res)=>{
+  res.render('docs');
+});
+
 //get call to streams/create
 app.get('/streams/create', (req,res,next)=>{
   //send GUI form page for creating a stream
