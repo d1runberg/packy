@@ -61,7 +61,7 @@ app.get('/streams/view', (req,res,next)=>{
     if(err){
       console.log(err);
     }
-    res.end(files.toString());
+    res.end('Current Stream Names: '+ files.toString());
   });
   //next();
 });
