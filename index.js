@@ -6,6 +6,9 @@ const mustacheExpress = require('mustache-express');
 const jsonfile = require('jsonfile');
 const json2csv = require('json2csv');
 const csv2json = require('csv-to-json');
+const csvJSON = require('simpleCsvToJson');
+//testing csv parsing
+const csvString = require('csv-string');
 ////file system
 const fileSys = require('fs');
 //path creation/transformation
@@ -25,6 +28,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+/*
+app.use(favicon(path.join(__dirname+'/public/img/favicon.ico'), {
+      maxAge: 2592000000
+    }));
+*/
+
 app.use(express.static(__dirname + '/public'));
 app.engine('mustache', mustacheExpress());
 
@@ -39,7 +48,7 @@ app.get('/', (req,res,next)=>{
 });
 
 app.get('/docs', (req,res)=>{
-  res.render('docs');
+  res.render('doc');
 });
 
 //get call to streams/create
@@ -55,20 +64,33 @@ app.get('/streams/view/:name', (req,res,next)=>{
   if(err){
     console.log(err);
   }
-    res.end(data.toString());
+   //test csv to array
+
+   //parse array objects to mustache data
+   //respond with mustache data
+
+   //end test
+
+    res.render('stream',{
+      streamName: req.params.name,
+      streamData: data
+    });
   });
   //next();
 });
 
 app.get('/streams/view', (req,res,next)=>{
-  var streams = fileSys.readdir(path.join(__dirname +'/streams'), (err,files)=>{
+  fileSys.readdir(path.join(__dirname +'/streams'), (err,files)=>{
     if(err){
       console.log(err);
     }
-    res.end('Current Stream Names: '+ files.toString());
+
+    res.render('streamList',{
+      streams: files
+    });
   });
-  //next();
-});
+ });
+
 
 app.get('/streams/download/:name', (req,res,next)=>{
 
@@ -256,8 +278,97 @@ app.get('/streams/input/:name/:key', (req,res,next)=>{
   });
 
 app.get('/streams/clear/:name/:privateKey', (req,res,next)=>{
-  //clear the log file.
-});
+  fileSys.readdir(path.join(__dirname+'/streams/'+req.params.name), (err,files)=>{
+    if(err){
+      res.end('Stream Not Found!');
+      console.log(err);
+    }
+    jsonfile.readFile(path.join(__dirname+'/streams/'+req.params.name+'/meta.json'), (err,data)=>{
+        //console.log('stream deleted!');
+
+         if(!data.key === req.params.privateKey){
+           res.end('incorrect private key');
+         }
+
+         if(req.query.backup== 'true' && req.query.format == 'csv'){
+           //res.write('Downloading CSV format!');
+           res.download(path.join(__dirname + '/streams/' + req.params.name + '/log.csv'), (err)=>{
+             if(err){
+               console.log(err);
+             }
+             fileSys.unlink(path.join(__dirname + '/streams/' + req.params.name + '/log.csv'), (err)=>{
+               if(err){
+                 console.log(err);
+               }
+               fileSys.appendFile(path.join(__dirname+'/streams/'+req.params.name+'/log.csv'), data.fieldString, (err)=>{
+                 if(err){
+                   console.log(err);
+                 }
+               });
+             });
+           });
+         }
+
+          else if(req.query.backup == 'true' && req.query.format == 'json'){
+            //turn the csv into json
+            //download the json
+            var csvFile =
+            {
+              filename: path.join(__dirname + '/streams/' + req.params.name + '/log.csv')
+            }
+            //parse the csv to temporary json file
+            csv2json.parse(csvFile, (err,json)=>{
+              var tempFile =
+                {
+                  filename: path.join(__dirname + '/streams/' + req.params.name + '/' + req.params.name + '.json'),
+                  json: json
+                }
+              //write file to json
+              csv2json.writeJsonToFile(tempFile, (err)=>{
+                if(err){
+                  console.log(err);
+                }
+                //download json file
+                res.download(path.join(__dirname + '/streams/' + req.params.name + '/' + req.params.name + '.json'), (err)=>{
+                  //delete temp json file when download is complete
+                  fileSys.unlink(path.join(__dirname + '/streams/' + req.params.name + '/' + req.params.name + '.json'),(err)=>{
+                    if(err){
+                      console.log(err);
+                    }
+                    fileSys.unlink(path.join(__dirname + '/streams/' + req.params.name + '/log.csv'), (err)=>{
+                      if(err){
+                        console.log(err);
+                      }
+                      fileSys.appendFile(path.join(__dirname+'/streams/'+req.params.name+'/log.csv'), data.fieldString, (err)=>{
+                        if(err){
+                          console.log(err);
+                        }
+                      });
+                    });
+                  });
+                });
+              });
+            });
+          }
+
+          else if(req.query.backup == 'false'){
+
+            fileSys.unlink(path.join(__dirname + '/streams/' + req.params.name + '/log.csv'), (err)=>{
+              if(err){
+                console.log(err);
+              }
+              fileSys.appendFile(path.join(__dirname+'/streams/'+req.params.name+'/log.csv'), data.fieldString, (err)=>{
+                if(err){
+                  console.log(err);
+                }
+                res.send('WARNING: Backup option is false, clearning data log without downloading!');
+              });
+            });
+           }
+          });
+     });
+   });
+
 
 app.use((err, req, res, next)=> {
   res.status(500);

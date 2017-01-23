@@ -90,7 +90,7 @@
       <p>SECRET KEY = Secret key for stream</p>
       <p>FIELDN = Field names for the stream</p>
       <p> VAL = Reporting value for that field </p>
-      
+
       <h3>Dowload a Stream</h3>
       <p>To download a string... </p>
       <code>http://localhost:5000/streams/download/[NAME]?format=[FORMAT]</code>
@@ -99,7 +99,11 @@
 
       <h3>Reset a Stream</h3>
       <p>To reset a string use... </p>
-      <p><b>NOT YET SUPPORTED </b></p>
+      <code>http://localhost:5000/streams/download/[NAME]/[KEY]?backup=[BACKUP]?format=[FORMAT]</code>
+      <p>NAME = Name of Stream </p>
+      <p>KEY = Private key for Stream </p>
+      <p>BACKUP = true or false option for downloading log before clearning</p>
+      <p>FORMAT = `csv` or `json`</p>
 
       <h3>Delete a Stream</h3>
       <p>To delete a string... </p>
@@ -108,10 +112,11 @@
       <p> DELETE KEY = Delete key for the string </p>
 
     </div>
-
+    <div>
+      <h2> About Packy </h2>
+      <p> About packy....</p>
     <div class="info-blocks">
-    <h4> About Packy </h4>
-    <p> Packy comes from...
+
 
   </div>
 
