@@ -162,7 +162,9 @@ app.get('/streams/delete/:name/:delete_key', (req,res,next)=>{
           if(err){
             console.log(err);
           }
-           res.end('Stream Deleted!');
+           res.render('deleted',{
+             stream: req.params.name
+           });
        });
      });
    });
