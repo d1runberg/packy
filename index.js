@@ -48,7 +48,7 @@ app.get('/', (req,res,next)=>{
 });
 
 app.get('/docs', (req,res)=>{
-  res.render('doc');
+  res.render('docs');
 });
 
 //get call to streams/create
