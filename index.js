@@ -35,6 +35,7 @@ app.use(favicon(path.join(__dirname+'/public/img/favicon.ico'), {
 */
 
 app.use(express.static(__dirname + '/public'));
+app.use('/streams',express.static(__dirname + '/streams'));
 app.engine('mustache', mustacheExpress());
 
 app.set('view engine', 'mustache');
@@ -72,8 +73,7 @@ app.get('/streams/view/:name', (req,res,next)=>{
    //end test
 
     res.render('stream',{
-      streamName: req.params.name,
-      streamData: data
+      streamName: req.params.name
     });
   });
   //next();
