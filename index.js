@@ -228,10 +228,12 @@ app.post('/streams/create', (req,res)=>{
         //write log.csv
         //respond with private keys
            //example get request
-           res.write("Stream Created!" + '\n');
-           res.write("Private Key: " + streamMeta.key+ ' \n');
-           res.end("Delete Key: " + streamMeta.del_key);
-           //res.render('createResponse',:{});
+
+           res.render('keys',{
+              streamName: streamMeta.name,
+              privateKey: streamMeta.key,
+              deleteKey: streamMeta.del_key
+         });
       });
     });
   });

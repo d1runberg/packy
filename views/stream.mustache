@@ -64,14 +64,12 @@
   <div class="row hero">
     <div class="col-md-12">
       <h1><span>{{streamName}}</span><br>a <b>data</b> stream.</h1>
-
     </div>
+    <button type="button" class="btn btn-danger">Download CSV</button>
+    <button type="button" class="btn btn-danger">Download JSON</button>
   </div>
 
 <!--<div class="row">-->
-
-<table class="table table-striped text-center table-hover">
-</table>
 <script type="text/javascript"charset="utf-8">
           //var path ='../../streams/bear/log.csv';
 
@@ -83,8 +81,11 @@
           //  "../../streams/bear/log.csv"
               var parsedCSV = d3.csvParseRows(data);
 
-              var container = d3.select("table")
-                  //.append("table")
+              var container = d3.select("body")
+                  .append("div").attr("class", "container")
+                  .append("table").attr("class", "table table-hover")
+                  .append("tbody")
+
                   .selectAll("tr")
                       .data(parsedCSV).enter()
                       .append("tr")
@@ -93,12 +94,7 @@
                       .append("td")
                       .text(function(d) { return d; });
           });
-
       </script>
-<!--</div>-->
-
-
-
 </body>
 <footer>
   <div class="container-fluid">
