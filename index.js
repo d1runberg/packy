@@ -7,9 +7,6 @@ const jsonfile = require('jsonfile');
 const json2csv = require('json2csv');
 const csv2json = require('csv-to-json');
 const csvJSON = require('simpleCsvToJson');
-//testing csv parsing
-const csvString = require('csv-string');
-////file system
 const fileSys = require('fs');
 //path creation/transformation
 const path = require('path');

@@ -84,8 +84,8 @@
               var container = d3.select("body")
                   .append("div").attr("class", "container")
                   .append("table").attr("class", "table table-hover")
-                  .append("tbody")
 
+                  .append("tbody")
                   .selectAll("tr")
                       .data(parsedCSV).enter()
                       .append("tr")
