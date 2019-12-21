@@ -41,13 +41,13 @@ Elephants never forget! This baby elephant is no exception. Packy was born from 
 3. install packy with `npm install packy`
 4. `cd node_packages/packy`
 5. start packy with `npm start`
-6. navigate to http://localhost:8080
+6. navigate to http://localhost:5000
 
 ##Use Documentation
 ### Create a stream
 
 1. use GET request:
-  - make a GET request to http://localhost:8080/streams/create/[NAME]?[field1]=&[field2]=&[fieldn]=
+  - make a GET request to http://localhost:5000/streams/create/[NAME]?[field1]=&[field2]=&[fieldn]=
   - fill in [field1], etc with your own field names (no []). Leave values blank for creation.
   - Packy will return a private key and a delete key
 
@@ -55,29 +55,29 @@ Elephants never forget! This baby elephant is no exception. Packy was born from 
   - navigate to http://localhost:5000/streams/create or click on the Create button on the home page.
 
 ### Add Data to a stream
-1. use a GET call to add data using a query string with your fields: http://localhost:8080/streams/input/[NAME]/[private key]?[field1]=32&[field2]=85&[fieldn]=Jim
+1. use a GET call to add data using a query string with your fields: http://localhost:5000/streams/input/[NAME]/[private key]?[field1]=32&[field2]=85&[fieldn]=Jim
 
 ### Delete a Stream
 1. Use a GET call to delete a Stream with your delete key:
-http://localhost:8080/streams/delete/[NAME]/[delete key]
+http://localhost:5000/streams/delete/[NAME]/[delete key]
 
 ### Download Data from Stream
 1. Use a GET call to download data in document form:
-http://localhost:8080/streams/download/[NAME]?format=[FORMAT]
+http://localhost:5000/streams/download/[NAME]?format=[FORMAT]
 
 - Packy currently  supports csv and json formats for download
 
 ###Clear a Stream
 1. Use a GET call to clear a stream of its current data:
-http://localhost:8080/streams/clear/[NAME]/[Private Key]?backup=[BOOLEAN]&format[FORMAT]
+http://localhost:5000/streams/clear/[NAME]/[Private Key]?backup=[BOOLEAN]&format[FORMAT]
 
 - backup query is `true` or `false`, if true data will be downloaded. If no format is given it defaults to csv
 - format query is either `csv` or `json` currently.
 
 ### View Data in Browser
 1. Use a GET call to view data in the Browser
-http://localhost:8080/streams/view/[NAME]
+http://localhost:5000/streams/view/[NAME]
 
 ### Viewing list of streams
 1. Use a GET call to view data in the Browser
-http://localhost:8080/streams/view
+http://localhost:5000/streams/view
