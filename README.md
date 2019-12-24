@@ -32,7 +32,7 @@ Elephants never forget! This baby elephant is no exception. Packy was born from 
 2. unzip
 3. in the command line navigate to folder
 4. install with `npm install`
-5. run with `node start`
+5. run with `node index.js`
 6. Server should run on http://localhost:5000
 
 ### From NPM (Not yet supported)
